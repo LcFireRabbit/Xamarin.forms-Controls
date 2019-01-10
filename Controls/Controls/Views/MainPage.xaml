@@ -2,10 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Controls.Views.MainPage"
+             xmlns:custom="clr-namespace:Controls.Controls;assembly=Controls"
              Title="{Binding Title}">
 
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
         <Label Text="Welcome to Xamarin Forms and Prism!" />
+        <ScrollView HeightRequest="200">
+            <custom:BindableRadioGroup x:Name="MyRadiouGroup"
+                                   ItemsSource="{Binding Path=MyList.Values}"
+                                   SelectedIndex="{Binding SelectedIndex}" VerticalOptions="Start" />
+        </ScrollView>
+
     </StackLayout>
 
 </ContentPage>
