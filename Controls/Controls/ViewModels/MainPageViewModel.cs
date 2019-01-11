@@ -25,6 +25,48 @@ namespace Controls.ViewModels
             set { SetProperty(ref _selectedIndex, value); }
         }
 
+        public class ItemModel:BindableBase
+        {
+            private bool _isSelected;
+            public bool IsSelected
+            {
+                get { return _isSelected; }
+                set { SetProperty(ref _isSelected, value); }
+            }
+
+            private string _organizationName;
+            public string OrganizationName
+            {
+                get { return _organizationName; }
+                set { SetProperty(ref _organizationName, value); }
+            }
+        }
+        private List<ItemModel> _orgList;
+        public List<ItemModel> OrgList
+        {
+            get { return _orgList; }
+            set { SetProperty(ref _orgList, value); }
+        }
+
+        private DelegateCommand<ItemModel> _navigateCommand;
+        public DelegateCommand<ItemModel> NavigateCommand =>
+            _navigateCommand ?? (_navigateCommand = new DelegateCommand<ItemModel>(ExecuteNavigateCommand));
+
+        void ExecuteNavigateCommand(ItemModel Item)
+        {
+            foreach (var temp in OrgList)
+            {
+                if (temp.OrganizationName == Item.OrganizationName)
+                {
+                    temp.IsSelected = true;
+                }
+                else
+                {
+                    temp.IsSelected = false;
+                }
+            }
+        }
+
         public MainPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
@@ -34,6 +76,13 @@ namespace Controls.ViewModels
             {
                 MyList.Add(i, "Item " + i);
             }
+            OrgList = new List<ItemModel>
+            {
+                new ItemModel { IsSelected = false, OrganizationName = "item1" },
+                new ItemModel { IsSelected = false, OrganizationName = "item2" },
+                new ItemModel { IsSelected = false, OrganizationName = "item3" },
+                new ItemModel { IsSelected = false, OrganizationName = "item4" }
+            };
         }
         new public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(String propertyName)

@@ -13,5 +13,15 @@ namespace Controls.Views
         {
             InitializeComponent();
         }
+
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+
+        }
+
+        private void ListView_Unfocused(object sender, FocusEventArgs e)
+        {
+
+        }
     }
 }

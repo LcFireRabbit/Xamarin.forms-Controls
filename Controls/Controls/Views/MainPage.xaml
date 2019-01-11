@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Controls.Views.MainPage"
+             xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" 
              xmlns:custom="clr-namespace:Controls.Controls;assembly=Controls"
              Title="{Binding Title}">
 
@@ -12,7 +13,30 @@
                                    ItemsSource="{Binding Path=MyList.Values}"
                                    SelectedIndex="{Binding SelectedIndex}" VerticalOptions="Start" />
         </ScrollView>
-
+        <ListView x:Name="OrganizesList"
+                  ItemsSource="{Binding OrgList, Mode=TwoWay}"
+                  SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" FlowDirection="LeftToRight">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="unselected.png" VerticalOptions="Center"/>
+                                <Image Grid.Column="0" Source="selected.png" VerticalOptions="Center" IsVisible="{Binding IsSelected}"/>
+                                <Label Grid.Column="1" Text="{Binding OrganizationName}" VerticalOptions="Center"/>
+                            </Grid>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior EventName="ItemTapped" EventArgsParameterPath="Item" Command="{Binding NavigateCommand}"/>
+            </ListView.Behaviors>
+        </ListView>
     </StackLayout>
 
 </ContentPage>
