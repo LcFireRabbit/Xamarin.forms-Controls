@@ -6,6 +6,6 @@
              xmlns:controls="clr-namespace:Controls.Controls.RotatableImage"
              x:Class="Controls.Views.Test1">
     <StackLayout>
-        <controls:RotatableImage WidthRequest="100" HeightRequest="100" ImageSource="device_stirring.png" ImagePalstance="270"/>
+        <controls:RotatableImage WidthRequest="100" HeightRequest="100" ImageSource="device_stirring.png" ImagePalstance="0.5"/>
     </StackLayout>
 </ContentPage>

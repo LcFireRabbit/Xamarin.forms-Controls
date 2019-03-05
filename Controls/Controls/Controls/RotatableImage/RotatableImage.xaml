@@ -5,7 +5,7 @@
              x:Name="rotatableImage">
   <ContentView.Content>
         <Grid BindingContext="{x:Reference rotatableImage}">
-            <Image x:Name="RTIamge" HorizontalOptions="Center" VerticalOptions="Center" Source="{Binding ImageSource}" WidthRequest="{Binding WidthRequest}" HeightRequest="{Binding HeightRequest}"/>
+            <Image x:Name="RTImage" HorizontalOptions="Center" VerticalOptions="Center" Source="{Binding ImageSource}" WidthRequest="{Binding WidthRequest}" HeightRequest="{Binding HeightRequest}"/>
         </Grid>
   </ContentView.Content>
 </ContentView>

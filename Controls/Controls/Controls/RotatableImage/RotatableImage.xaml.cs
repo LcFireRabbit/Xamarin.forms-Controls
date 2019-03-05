@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -35,7 +29,7 @@ namespace Controls.Controls.RotatableImage
 
         // Using a DependencyProperty as the backing store for ImagePalstance.  This enables animation, styling, binding, etc...
         public static readonly BindableProperty ImagePalstanceProperty =
-            BindableProperty.Create("ImagePalstance", typeof(double), typeof(RotatableImage), 0.0,propertyChanged: OnImagePalstanceChanged);
+            BindableProperty.Create("ImagePalstance", typeof(double), typeof(RotatableImage), 0.0, propertyChanged: OnImagePalstanceChanged);
 
         private static void OnImagePalstanceChanged(BindableObject bindable, object oldValue, object newValue)
         {
@@ -43,17 +37,20 @@ namespace Controls.Controls.RotatableImage
                 return;
             var RTI = bindable as RotatableImage;
 
+
             double newValueD = (double)newValue;
             if (newValueD != 0)
             {
-                double angle = newValueD / 1000 * 50000;//默认50s一个动画循环播放
-                var rotateAnimation = new Animation(v => RTI.RTIamge.Rotation = v, RTI.RTIamge.Rotation % 360, RTI.RTIamge.Rotation % 360 + angle);
-                rotateAnimation.Commit(RTI, "RotateAnimation", 0, 50000, Easing.Linear, null, () => true);
+                var durationTime = 800 + (1 - newValueD) * 1000;
+
+                var rotateAnimation = new Animation(v => RTI.RTImage.Rotation = v, RTI.RTImage.Rotation, RTI.RTImage.Rotation + 360);
+
+                rotateAnimation.Commit(RTI, "RotateAnimation", 16, (uint)durationTime, Easing.Linear, null, () => true);
             }
             else
             {
                 RTI.AbortAnimation("RotateAnimation");
-                RTI.RTIamge.Rotation = 0;
+                RTI.RTImage.Rotation = 0;
             }
         }
 
